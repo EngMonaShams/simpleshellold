@@ -54,12 +54,14 @@ void exec_fork(char *input)
 	int index = 0, tok_num;
 	pid_t pid = fork();
 
+	(void)input_cpy;
+
 	if (pid == 0)
 	{
 		input_cpy = cpy_input(input);
 		tok_num = tok_count(input);
 		args = malloc(sizeof(char *) * tok_num);
-		token = strtok(input, " ");
+		token = strtok(input_cpy, " ");
 		while (token != NULL && index <= tok_num)
 		{
 			args[index] = malloc(_strlen(token));

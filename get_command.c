@@ -7,7 +7,7 @@
 void get_command(char **input)
 {
 	size_t len = 0;
-	size_t input_len;
+	int input_len;
 
 	input_len = getline(input, &len, stdin) == -1;
 	len = _strlen(*input);
