@@ -69,8 +69,7 @@ void exec_fork(char *input)
 			token = strtok(NULL, " ");
 		}
 		args[index] = NULL;
-
-		if (execvp(args[0], args) == -1)
+		if (execve(args[0], args, NULL) == -1)
 		{
 			perror("Error executing command");
 			exit(1);
