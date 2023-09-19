@@ -9,7 +9,7 @@ void get_command(char **input)
 	size_t len = 0;
 	int input_len;
 
-	input_len = getline(input, &len, stdin) == -1;
+	input_len = getline(input, &len, stdin);
 	len = _strlen(*input);
 	if (input_len == -1)
 		exit_shell();
