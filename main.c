@@ -10,7 +10,7 @@
  */
 int main(int ac, char **args)
 {
-	char *input = NULL;
+	char *input = NULL, *trim_input;
 
 	(void)ac, (void)args;
 
@@ -22,6 +22,14 @@ int main(int ac, char **args)
 			fflush(stdout);
 		}
 		get_command(&input);
+		_strcpy(trim_input, input);
+		while (*trim_input == ' ' || *trim_input == '\t')
+			trim_input++;
+		if (*trim_input == '\0')
+		{
+			free(input);
+			exit(0);
+		}
 		exec_fork(input);
 		free(input);
 		input = NULL;
