@@ -50,26 +50,28 @@ int tok_count(char *input)
  */
 void exec_fork(char *input)
 {
-	char **args, *token, *input_cpy = NULL;
+	char **args, *token, *input_cpy = NULL, *cmd;
 	int index = 0, tok_num;
-	pid_t pid = fork();
+	pid_t pid;
 
-	(void)input_cpy;
-
+	input_cpy = cpy_input(input);
+	tok_num = tok_count(input);
+	args = malloc(sizeof(char *) * tok_num);
+	token = strtok(input_cpy, " ");
+	while (token != NULL && index <= tok_num)
+	{
+		args[index] = malloc(_strlen(token));
+		args[index++] = token;
+		token = strtok(NULL, " ");
+	}
+	args[index] = NULL;
+	if (!_strcmp(args[0], "exit"))
+		exit(1);
+	pid = fork();
 	if (pid == 0)
 	{
-		input_cpy = cpy_input(input);
-		tok_num = tok_count(input);
-		args = malloc(sizeof(char *) * tok_num);
-		token = strtok(input_cpy, " ");
-		while (token != NULL && index <= tok_num)
-		{
-			args[index] = malloc(_strlen(token));
-			args[index++] = token;
-			token = strtok(NULL, " ");
-		}
-		args[index] = NULL;
-		if (execve(args[0], args, NULL) == -1)
+		cmd = mk_path(args[0]);
+		if (execve(cmd, args, NULL) == -1)
 		{
 			perror("Error executing command");
 			exit(1);
