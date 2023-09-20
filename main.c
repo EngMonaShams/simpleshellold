@@ -5,9 +5,11 @@
  *
  * Return: always 0
  */
-int main(void)
+int main(int ac, char **args)
 {
 	char *input = NULL;
+
+	(void)ac, (void)args;
 
 	while (1)
 	{
