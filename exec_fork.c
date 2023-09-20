@@ -76,8 +76,6 @@ void exec_fork(char *input)
 			perror("Error executing command");
 			exit(1);
 		}
-		free(args);
-		free(input_cpy);
 		free(cmd);
 	}
 	else if (pid > 0)
@@ -87,4 +85,6 @@ void exec_fork(char *input)
 		perror("Error forking");
 		exit(1);
 	}
+	free(args);
+	free(input_cpy);
 }

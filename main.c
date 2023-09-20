@@ -3,6 +3,9 @@
 /**
  * main - program entry point
  *
+ * @ac: number of args
+ * @args:pointer to array of args
+ *
  * Return: always 0
  */
 int main(int ac, char **args)

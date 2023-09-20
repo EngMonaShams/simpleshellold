@@ -40,7 +40,6 @@ char *mk_path(char *cmd)
 			}
 		}
 			free(path_cpy);
-			free(cmd_path);
 			if (stat(cmd, &buf) == 0)
 				return (cmd);
 			return (NULL);
