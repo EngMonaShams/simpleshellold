@@ -77,7 +77,8 @@ void exec_fork(char *input)
 			exit(1);
 		}
 		free(args);
-
+		free(input_cpy);
+		free(cmd);
 	}
 	else if (pid > 0)
 		wait(NULL);
