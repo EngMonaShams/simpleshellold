@@ -16,7 +16,11 @@ int main(int ac, char **args)
 
 	while (1)
 	{
-		write(STDOUT_FILENO, "shell$", _strlen("shell$"));
+		if (isatty(fileno(stdin)))
+		{
+			write(STDOUT_FILENO, "shell$", _strlen("shell$"));
+			fflush(stdout);
+		}
 		get_command(&input);
 		exec_fork(input);
 		free(input);

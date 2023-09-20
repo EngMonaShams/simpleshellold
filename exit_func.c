@@ -5,6 +5,5 @@
  */
 void exit_shell(void)
 {
-	_putchar('\n');
 	exit(0);
 }
