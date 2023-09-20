@@ -86,8 +86,6 @@ void exec_fork(char *input)
 		perror("Error forking");
 		exit(1);
 	}
-	for(index = 0, index <=tok_num, index++)
-		free(args[index]);
 	free(args);
 	free(input_cpy);
 }
