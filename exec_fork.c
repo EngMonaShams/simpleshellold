@@ -12,7 +12,7 @@ char *cpy_input(char *input)
 {
 	char *input_cpy = NULL;
 
-	input_cpy = malloc(_strlen(input));
+	input_cpy = malloc(_strlen(input) + 1);
 	if (input_cpy == NULL)
 	{
 		perror("tsh: memory allocation error");
@@ -32,7 +32,7 @@ char *cpy_input(char *input)
 int tok_count(char *input)
 {
 	char *token;
-	int count = 1;
+	int count = 0;
 
 	token = strtok(input, " ");
 	while (token != NULL)
@@ -40,6 +40,7 @@ int tok_count(char *input)
 		count++;
 		token = strtok(NULL, " ");
 	}
+	count++;
 	return (count);
 }
 
@@ -60,13 +61,13 @@ void exec_fork(char *input)
 	token = strtok(input_cpy, " ");
 	while (token != NULL && index <= tok_num)
 	{
-		args[index] = malloc(_strlen(token));
+		args[index] = malloc(_strlen(token) + 1);
 		args[index++] = token;
 		token = strtok(NULL, " ");
 	}
 	args[index] = NULL;
 	if (!_strcmp(args[0], "exit"))
-		exit(1);
+		exit(0);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -85,6 +86,8 @@ void exec_fork(char *input)
 		perror("Error forking");
 		exit(1);
 	}
+	for(index = 0, index <=tok_num, index++)
+		free(args[index]);
 	free(args);
 	free(input_cpy);
 }
