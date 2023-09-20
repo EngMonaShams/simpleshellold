@@ -11,6 +11,10 @@ void get_command(char **input)
 
 	input_len = getline(input, &len, stdin);
 	len = _strlen(*input);
+	if (input_len > 265)
+	{
+		exit(0);
+	}
 	if (input_len == -1)
 		exit_shell();
 	if (len == 0)
