@@ -13,10 +13,14 @@ void get_command(char **input)
 	len = _strlen(*input);
 	if (input_len > 265)
 	{
+		free(input);
 		exit(0);
 	}
 	if (input_len == -1)
+	{
+		free(input);
 		exit_shell();
+	}
 	if (len == 0)
 		return;
 	if (len > 0 && (*input)[len - 1] == '\n')
