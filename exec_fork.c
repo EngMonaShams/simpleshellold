@@ -72,7 +72,7 @@ void exec_fork(char *input)
 	if (pid == 0)
 	{
 		cmd = mk_path(args[0]);
-		if (execve(cmd, args, NULL) == -1)
+		if (execvp(cmd, args) == -1)
 		{
 			perror("Error executing command");
 			exit(1);
