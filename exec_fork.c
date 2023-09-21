@@ -48,6 +48,7 @@ int tok_count(char *input)
  * exec_fork - a function that executes fork (child)
  *
  * @input: a pointer to input
+ * @env: enviroment
  */
 void exec_fork(char *input, char **env)
 {
