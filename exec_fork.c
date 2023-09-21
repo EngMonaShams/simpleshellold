@@ -49,7 +49,7 @@ int tok_count(char *input)
  *
  * @input: a pointer to input
  */
-void exec_fork(char *input)
+void exec_fork(char *input, char **env)
 {
 	char **args, *token, *input_cpy = NULL, *cmd;
 	int index = 0, tok_num;
@@ -72,7 +72,7 @@ void exec_fork(char *input)
 	if (pid == 0)
 	{
 		cmd = mk_path(args[0]);
-		if (execvp(cmd, args) == -1)
+		if (execve(cmd, args, env) == -1)
 		{
 			perror("Error executing command");
 			exit(1);

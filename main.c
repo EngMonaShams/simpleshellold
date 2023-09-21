@@ -8,7 +8,7 @@
  *
  * Return: always 0
  */
-int main(int ac, char **args)
+int main(int ac, char **args, char **env)
 {
 	char *input = NULL, *trim_input;
 
@@ -30,7 +30,7 @@ int main(int ac, char **args)
 			free(input);
 			exit(0);
 		}
-		exec_fork(input);
+		exec_fork(input, env);
 		free(input);
 		input = NULL;
 	}

@@ -25,7 +25,7 @@ char *_strdup(char *str);
 void exit_shell(void);
 
 void get_command(char **input);
-void exec_fork(char *input);
+void exec_fork(char *input, char **env);
 char *cpy_input(char *input);
 char *mk_path(char *cmd);
 
