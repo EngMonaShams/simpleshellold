@@ -9,8 +9,6 @@
 #include <sys/wait.h>
 #include <string.h>
 
-#define IN_SIZE 100
-
 /*string functions*/
 int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
@@ -28,5 +26,6 @@ void get_command(char **input);
 void exec_fork(char *input, char **env);
 char *cpy_input(char *input);
 char *mk_path(char *cmd);
+int tok_count(char *input);
 
 #endif /*SHELL_H*/
