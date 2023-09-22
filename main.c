@@ -23,7 +23,7 @@ int main(int ac, char **args, char **env)
 			fflush(stdout);
 		}
 		get_command(&input);
-		_strcpy(trim_input, input);
+		trim_input = _strcpy(trim_input, input);
 		while (*trim_input == ' ' || *trim_input == '\t')
 			trim_input++;
 		if (*trim_input == '\0')
