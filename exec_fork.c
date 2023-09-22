@@ -14,11 +14,8 @@ char *cpy_input(char *input)
 
 	input_cpy = malloc(_strlen(input));
 	if (input_cpy == NULL)
-	{
-		perror("tsh: memory allocation error");
-		exit(0);
-	}
-	_strcpy(input_cpy, input);
+		exit_alloc_error();
+	input_cpy = _strcpy(input_cpy, input);
 	return (input_cpy);
 }
 
@@ -59,18 +56,31 @@ void exec_fork(char *input, char **env)
 	input_cpy = cpy_input(input);
 	tok_num = tok_count(input);
 	args = malloc(sizeof(char *) * tok_num);
+	if (args == NULL)
+	{
+		free(input);
+		exit_alloc_error();
+	}
 	token = strtok(input_cpy, " ");
 	while (token != NULL && index <= tok_num)
 	{
 		args[index] = malloc(_strlen(token) + 1);
+		if (args[index] == NULL)
+		{
+			while (index--)
+				free(args[index]);
+			free(args);
+			exit_alloc_error();
+		}
 		args[index++] = token;
 		token = strtok(NULL, " ");
 	}
 	args[index] = NULL;
+	free(input_cpy);
+	input_cpy = NULL;
 	if (!_strcmp(args[0], "exit"))
 	{
 		free(args);
-		free(input_cpy);
 		free(input);
 		exit(0);
 	}
@@ -80,6 +90,9 @@ void exec_fork(char *input, char **env)
 		cmd = mk_path(args[0]);
 		if (execve(cmd, args, env) == -1)
 		{
+			free(args);
+			free(input);
+			free(cmd);
 			perror("Error executing command");
 			exit(1);
 		}
@@ -90,9 +103,10 @@ void exec_fork(char *input, char **env)
 		wait(NULL);
 	else
 	{
+		free(args);
+		free(input);
 		perror("Error forking");
 		exit(1);
 	}
 	free(args);
-	free(input_cpy);
 }
