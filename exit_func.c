@@ -14,5 +14,5 @@ void exit_shell(void)
 void exit_alloc_error(void)
 {
 	perror("tsh: memory allocation error");
-	exit(0);
+	exit(1);
 }
