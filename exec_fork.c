@@ -12,11 +12,11 @@ char *cpy_input(char *input)
 {
 	char *input_cpy = NULL;
 
-	input_cpy = malloc(_strlen(input) + 1);
+	input_cpy = malloc(_strlen(input));
 	if (input_cpy == NULL)
 	{
 		perror("tsh: memory allocation error");
-		exit_shell();
+		exit(0);
 	}
 	_strcpy(input_cpy, input);
 	return (input_cpy);
@@ -68,7 +68,12 @@ void exec_fork(char *input, char **env)
 	}
 	args[index] = NULL;
 	if (!_strcmp(args[0], "exit"))
+	{
+		free(args);
+		free(input_cpy);
+		free(input);
 		exit(0);
+	}
 	pid = fork();
 	if (pid == 0)
 	{
@@ -79,6 +84,7 @@ void exec_fork(char *input, char **env)
 			exit(1);
 		}
 		free(cmd);
+		cmd = NULL;
 	}
 	else if (pid > 0)
 		wait(NULL);

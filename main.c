@@ -13,7 +13,7 @@ int main(int ac, char **args, char **env)
 {
 	char *input = NULL, *trim_input;
 
-	(void)ac, (void)args;
+	(void)ac, (void)args, (void)env;
 
 	while (1)
 	{
@@ -29,7 +29,8 @@ int main(int ac, char **args, char **env)
 		if (*trim_input == '\0')
 		{
 			free(input);
-			exit(0);
+			input = NULL;
+			continue;
 		}
 		exec_fork(input, env);
 		free(input);
