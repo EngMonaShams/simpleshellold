@@ -20,6 +20,8 @@ int _strcmp(char *s1, char *s2);
 char *_strdup(char *str);
 
 /*exit finctions*/
+void exit_alloc_error(void);
+
 void get_command(char **input);
 void exec_fork(char *input, char **env);
 char *cpy_input(char *input);
