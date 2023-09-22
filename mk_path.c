@@ -24,8 +24,11 @@ char *mk_path(char *cmd)
 			len_tok = _strlen(token);
 			cmd_path = malloc(len_cmd + len_tok + 2);
 			if (cmd_path == 0)
-				return (NULL);
-			_strcpy(cmd_path, token);
+			{
+				free(path_cpy);
+				exit_alloc_error();
+			}
+			cmd_path = _strcpy(cmd_path, token);
 			_strcat(cmd_path, "/");
 			_strcat(cmd_path, cmd);
 			_strcat(cmd_path, "\0");
@@ -36,14 +39,13 @@ char *mk_path(char *cmd)
 				return (cmd_path);
 			}
 			else
-			{
 				token = strtok(NULL, ":");
-			}
 		}
-			free(path_cpy);
-			if (stat(cmd, &buf) == 0)
-				return (cmd);
-			return (NULL);
+		free(path_cpy);
+		path_cpy = NULL;
+		if (stat(cmd, &buf) == 0)
+			return (cmd);
+		return (NULL);
 	}
 	return (NULL);
 }
