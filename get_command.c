@@ -17,10 +17,7 @@ void get_command(char **input)
 		exit(0);
 	}
 	if (input_len == -1)
-	{
-		free(input);
-		exit_shell();
-	}
+		exit(0);
 	if (len == 0)
 		return;
 	if (len > 0 && (*input)[len - 1] == '\n')

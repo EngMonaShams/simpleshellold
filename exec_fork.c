@@ -67,7 +67,6 @@ void exec_fork(char *input, char **env)
 		token = strtok(NULL, " ");
 	}
 	args[index] = NULL;
-	free(input_cpy);
 	if (!_strcmp(args[0], "exit"))
 		exit(0);
 	pid = fork();
@@ -88,7 +87,6 @@ void exec_fork(char *input, char **env)
 		perror("Error forking");
 		exit(1);
 	}
-	while (index--)
-		free(args[index]);
 	free(args);
+	free(input_cpy);
 }
